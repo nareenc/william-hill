@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>William Hills Test Data</comment>
+    <entry key="williamhill_url">https://www.williamhill.com.au/</entry>
+    <entry key="menuItem">Horse Racing</entry>
+    <entry key="raceType">horse-racing</entry>
+    <entry key="raceId">18128833</entry>
+    <entry key="raceName">Kyneton: 3</entry>
+    <entry key="competitorName">Barbaretta</entry>
+</properties>
