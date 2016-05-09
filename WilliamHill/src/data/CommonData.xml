@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Browser and Environment variables</comment>
+    
+    <entry key="browser">Chrome</entry>
+    <!--<entry key="browser">Safari</entry>-->
+    <!--<entry key="currency_symbol">£</entry>-->
+    
+    <!--<entry key="browser">Remote</entry>-->
+    <!--<entry key="browser">Firefox</entry>-->
+    <!--<entry key="browser">InternetExplorer</entry>-->
+    <!--<entry key="ie_version">9</entry>-->
+    <!--<entry key="browser">HTMLUnit</entry>-->
+    <!--<entry key="browser">SauceLabs</entry>-->
+    <entry key="record">False</entry>
+    <entry key="screen_shot_location">C:\Selenium\TestResults\Screenshots\</entry>
+
+    <!--remote-->
+    <!--<entry key="remoteUrl">http://192.168.0.101:8001/wd/hub</entry>-->
+
+    <!--local Grid-->
+    <entry key="remoteUrl">http://192.168.1.6:7020/wd/hub</entry>
+
+    <!--saucelabs-->
+    <!--<entry key="remoteUrl">http://pavandeepp:61ea02b2-d9ee-4167-8e36-a4f7cb2295a0@ondemand.saucelabs.com:80/wd/hub-->
+    <!--</entry>-->
+
+   <entry key="environment">williamhill</entry>
+   
+    <entry key="williamhill_url">https://www.williamhill.com.au/</entry>
+    <entry key="local_url">http://192.168.0.110:8080/</entry>
+    <entry key="mylocal_url">http://192.168.0.140:8080/</entry>
+    <entry key="recorder_url">https://recorder.encompasshost.com/</entry>
+    <entry key="devtest_url">https://devtest.encompasshost.com/</entry>
+    <entry key="dtlocal_url">https://devtest-local.encompasshost.com/</entry>
+    <entry key="devtestHUB_url">https://devtest.encompasshost.com/ui/index.html</entry>
+    <entry key="test2UK_url">https://test2uk.encompasshost.com/</entry>
+    <entry key="test3UK_url">https://test3uk.encompasshost.com/</entry>
+    <entry key="uktest1_url">https://uktest1.encompasshost.com/</entry>
+    <entry key="devapps_url">https://devapps.encompasshost.com/sai/</entry>
+    <entry key="staging_url">https://staging.encompasshost.com/</entry>
+    <entry key="admin_devtest_url">https://admindevtest.encompasshost.com/</entry>
+    <entry key="admin_devapps_url">https://devapps.encompasshost.com/admin-portal/</entry>
+    <entry key="admin_staging_url">https://adminstaging.encompasshost.com/</entry>
+    <!--<entry key="staging_url">http://192.168.0.26:8080/</entry>-->
+    <entry key="sandbox_url">https://sandbox.encompasshost.com/</entry>
+    <entry key="training_url">https://training.encompasshost.com/</entry>
+    <entry key="sandboxtest_url">https://sandboxtest.encompasshost.com/</entry>
+    <entry key="trainingtest_url">https://trainingtest.encompasshost.com/</entry>
+    <entry key="amazon_url">https://ec2.encompasshost.com.au/encompass/</entry>
+    <entry key="rest_doc_url">rest-docs/index.html</entry>
+    <entry key="test1UK_url">https://test1uk.encompasshost.com/</entry>
+    <entry key="UK_staging_url">https://ukstaging.encompasshost.com/</entry>
+    <entry key="stagingUK_url">https://staginguk.encompasshost.com/</entry>
+    <entry key="uk_angular_url">http://app-test1.encompasshost.com/</entry>
+    <entry key="sai_angular_url">http://app-test3.encompasshost.com/</entry>
+</properties>

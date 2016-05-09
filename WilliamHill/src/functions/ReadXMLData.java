@@ -10,6 +10,10 @@ import java.util.Properties;
 public class ReadXMLData {
     public String value;
 
+    public String commonData(String node) {
+        return readData(node, "src/data/CommonData.xml");
+    }
+    
     public String getHorseRaceData(String node) {
         return readData(node, "src/data/HorseRaceData.xml");
     }

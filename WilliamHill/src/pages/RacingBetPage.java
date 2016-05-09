@@ -8,7 +8,7 @@ import static org.openqa.selenium.By.xpath;
 public class RacingBetPage extends CommonFunctions {
 
     public RacingBetPage(CommonFunctions testClass) {
-        setDriver(testClass.getDriver());
+        setWebDriver(testClass.getWebDriver());
         setWait(testClass.getWait());
     }
 

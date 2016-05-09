@@ -1,72 +1,145 @@
+/*
+ * This source file is proprietary property of Encompass Corporation.
+ */
 package functions;
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
-import java.util.concurrent.TimeUnit;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class CommonFunctions {
-    private String baseUrl;
-    protected WebDriver driver;
-    ReadXMLData data = new ReadXMLData();
-    protected Wait<WebDriver> wait;
-    
- //   private Wait
+import static functions.BrowserConstants.BROWSER_IE;
+import static org.openqa.selenium.By.*;
+import static org.testng.Assert.*;
 
-    public Wait<WebDriver> getWait() {
-        return wait;
+@SuppressWarnings("unused")
+public class CommonFunctions extends WebFunctions {
+
+    private boolean hub;
+    private boolean isStartSearchOrisIE;
+    private boolean previousSearch;
+    private String client_user_id;
+    public int resultcount;
+    public String ie_version = getData().commonData("ie_version");
+    private String testresults;
+    private String retrieve_selected_certificates;
+    private Boolean share_workspace;
+    private String end_point;
+
+    public CommonFunctions() {
+       
     }
 
-    public void setWait(Wait<WebDriver> wait) {
-        this.wait = wait;
+    @Parameters(value = "IPAddress")
+    @BeforeClass()
+    protected void setup(@Optional String remoteWebDriverUrl) throws MalformedURLException {
+        super.start(remoteWebDriverUrl);
     }
 
-    public WebDriver getDriver() {
-        return driver;
+    @AfterClass
+    public void teardown() throws Exception {
+        if (getRecord()) {
+            stopRecording();
+        }
+        super.stop();
     }
 
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
+
+    public void clickAt(By by) throws InterruptedException, IOException {
+        Thread.sleep(1000);
+        if (getBrowser().contains("Firefox")) {
+            click(by);
+        } else {
+            Actions builder = new Actions(getWebDriver());
+            try {
+                WebElement tagElement = getWebDriver().findElement(by);
+                builder.moveToElement(tagElement).click().perform();
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                takeScreenshot();
+                fail("Can not find " + by);
+            }
+        }
     }
 
-    @SuppressWarnings("unchecked")
-    @BeforeTest
-    public void setUp() {
-        driver = new FirefoxDriver();
-        baseUrl = data.getHorseRaceData("williamhill_url");
-        driver.get(baseUrl);
-        wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(60, TimeUnit.SECONDS)
-                .pollingEvery(5, TimeUnit.SECONDS)
-                .ignoring(NoSuchElementException.class);
+
+    public void clickAt(WebElement tagElement) throws InterruptedException, IOException {
+        Thread.sleep(1000);
+        Actions builder = new Actions(getWebDriver());
+        try {
+            builder.moveToElement(tagElement).click().perform();
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            takeScreenshot();
+            fail("Can not find " + tagElement);
+        }
     }
 
-    public WebElement clickableElement(final By by) {
-        return wait.until(ExpectedConditions.elementToBeClickable(by));
+
+    public void doubleClick(By by) throws InterruptedException, IOException {
+        Thread.sleep(1000);
+        Actions builder = new Actions(getWebDriver());
+        try {
+            WebElement tagElement = getWebDriver().findElement(by);
+            builder.doubleClick(tagElement).perform();
+            Thread.sleep(1000);
+        } catch (Exception e) {
+//            takeScreenshot();
+        }
     }
 
-    public WebElement webElement(final By by) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+   
+
+    public void type(By by, String value) throws InterruptedException {
+        try {
+            getWebDriver().findElement(by).clear();
+            getWebDriver().findElement(by).sendKeys(value);
+        } catch (Exception e) {
+            getWebDriver().findElement(by).clear();
+            getWebDriver().findElement(by).sendKeys(value);
+        }
     }
 
-    public void pass(String value) {
-        System.out.println(value);
+    public void type(WebElement element, String value) throws InterruptedException {
+        element.clear();
+        element.sendKeys(value);
     }
 
-    public void fail(String value) {
-        System.err.println(value);
+    public void typeAll(String[] path, String[] value) throws InterruptedException {
+        int len = path.length;
+        for (int i = 0; i <= (len - 1); i++) {
+            if (isElementPresent(xpath(path[i]))) {
+                type(xpath(path[i]), value[i]);
+            }
+        }
     }
 
-    @AfterTest
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+    public void actionType(By by, String value) throws InterruptedException {
+        waitForElementPresent((by));
+        new Actions(getWebDriver()).moveToElement(getWebDriver().findElement(by)).click()
+                .sendKeys(Keys.chord(Keys.CONTROL, "a"), value).perform();
+    }   
 }

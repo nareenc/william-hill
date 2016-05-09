@@ -18,7 +18,7 @@ public class HorseRaceBet extends CommonFunctions {
         racingBet.clickMenuItem(data.getHorseRaceData("menuItem"));
         try {
             //Assert for the page title after clicking the Horse Racing menu item
-            Assert.assertTrue(driver.getTitle().contains(data.getHorseRaceData("menuItem")));
+            Assert.assertTrue(getWebDriver().getTitle().contains(data.getHorseRaceData("menuItem")));
             pass(data.getHorseRaceData("menuItem") + " is displayed in the page title");
         } catch (AssertionError e) {
             fail(data.getHorseRaceData("menuItem") + " is not displayed in the page title");
@@ -34,7 +34,7 @@ public class HorseRaceBet extends CommonFunctions {
         }
         try {
             //Assert for the raceId on the page title
-            Assert.assertTrue(driver.getTitle().contains(data.getHorseRaceData("raceId")));
+            Assert.assertTrue(getWebDriver().getTitle().contains(data.getHorseRaceData("raceId")));
             pass(data.getHorseRaceData("raceId") + " is displayed in the page title");
         } catch (AssertionError e) {
             fail(data.getHorseRaceData("raceId") + " is not displayed in the page title");
